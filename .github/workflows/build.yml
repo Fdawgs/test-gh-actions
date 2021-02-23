@@ -1,0 +1,18 @@
+name: CI
+
+on:
+    workflow_dispatch:
+
+jobs:
+    build:
+        name: Build
+        runs-on: macos-latest
+        steps:
+            - uses: actions/checkout@v2
+            - name: Install macOS Dependencies
+              env:
+                  HOMEBREW_NO_INSTALL_CLEANUP: 1
+                  HOMEBREW_NO_AUTO_UPDATE: 1
+              run: brew install poppler
+            - run: cd /usr/local/bin
+            - run: ls
