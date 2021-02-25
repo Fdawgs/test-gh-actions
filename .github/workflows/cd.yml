@@ -14,21 +14,16 @@ jobs:
               id: release
               uses: GoogleCloudPlatform/release-please-action@v2.20.1
               with:
-                  changelog-types: '[{"type":"feat","section":"Features","hidden":false},{"type":"fix","section":"Bug Fixes","hidden":false},{"type":"chore","section":"Miscellaneous","hidden":false}]'
+                  changelog-types: '[ { "type": "feat", "section": "Features", "hidden": false }, { "type": "fix", "section": "Bug Fixes", "hidden": false }, { "type": "build", "section": "Miscellaneous", "hidden": false }, { "type": "chore", "section": "Miscellaneous", "hidden": false }, { "type": "ci", "section": "Miscellaneous", "hidden": false }, { "type": "perf", "section": "Miscellaneous", "hidden": false }, { "type": "refactor", "section": "Miscellaneous", "hidden": false }, { "type": "style", "section": "Miscellaneous", "hidden": false }, { "type": "docs", "section": "Documentation", "hidden": false }]'
                   release-type: node
-                  package-name: test-gh-actions
-    publish:
-        name: Publish to NPM
-        needs: release-please
-        if: ${{ needs.release-please.steps.release.outputs.release_created }}
-        runs-on: ubuntu-latest
-        steps:
             - uses: actions/checkout@v2.3.4
+              if: ${{ steps.release.outputs.release_created }}
+            - name: Publish to NPM
+              if: ${{ steps.release.outputs.release_created }}
             - uses: actions/setup-node@v2.1.5
               with:
                   node-version: 14.x
                   registry-url: https://registry.npmjs.org/
-            - run: npm install --ignore-scripts
-            - run: npm publish --ignore-scripts
+              run: npm install --ignore-scripts && npm publish --ignore-scripts
               env:
                   NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
