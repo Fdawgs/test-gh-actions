@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.0.2](https://www.github.com/Fdawgs/test-gh-actions/compare/v1.0.1...v1.0.2) (2021-02-25)
+
+
+### Miscellaneous
+
+* test2 ([5eb4b15](https://www.github.com/Fdawgs/test-gh-actions/commit/5eb4b154c2f4d135b537ab0ad22c6ff033060f62))
+
 ### [1.0.1](https://www.github.com/Fdawgs/test-gh-actions/compare/v1.0.0...v1.0.1) (2021-02-25)
 
 
