@@ -17,14 +17,16 @@ jobs:
                   changelog-types: '[ { "type": "feat", "section": "Features", "hidden": false }, { "type": "fix", "section": "Bug Fixes", "hidden": false }, { "type": "build", "section": "Miscellaneous", "hidden": false }, { "type": "chore", "section": "Miscellaneous", "hidden": false }, { "type": "ci", "section": "Miscellaneous", "hidden": false }, { "type": "perf", "section": "Miscellaneous", "hidden": false }, { "type": "refactor", "section": "Miscellaneous", "hidden": false }, { "type": "style", "section": "Miscellaneous", "hidden": false }, { "type": "docs", "section": "Documentation", "hidden": false }]'
                   release-type: node
                   package-name: ""
-            - uses: actions/checkout@v2.3.4
-              if: ${{ steps.release.outputs.release_created }}
-            - uses: actions/setup-node@v2.1.5
-              with:
-                  node-version: 14.x
-                  registry-url: https://registry.npmjs.org/
-              if: ${{ steps.release.outputs.release_created }}
-            - run: npm install --ignore-scripts && npm publish --ignore-scripts
-              if: ${{ steps.release.outputs.release_created }}
-              env:
-                  NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+            # Comment below out if not publishing to NPM
+            # - uses: actions/checkout@v2.3.4
+            #   if: ${{ steps.release.outputs.release_created }}
+            # - uses: actions/setup-node@v2.1.5
+            #   with:
+            #       node-version: 14.x
+            #       registry-url: https://registry.npmjs.org/
+            #   if: ${{ steps.release.outputs.release_created }}
+            # - run: npm install --ignore-scripts && npm publish --ignore-scripts
+            #   if: ${{ steps.release.outputs.release_created }}
+            #   env:
+            #       NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
