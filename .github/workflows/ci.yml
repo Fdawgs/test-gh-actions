@@ -41,47 +41,47 @@ jobs:
               with:
                   configFile: ./package.json
 
-    unit-tests:
-        name: Unit Tests
-        if: github.event.pull_request.draft == false
-        strategy:
-            matrix:
-                node-version: [10.x, 12.x, 14.x]
-                os: [macos-latest, ubuntu-latest, windows-latest]
-        runs-on: ${{ matrix.os }}
-        steps:
-            - uses: actions/checkout@v2.3.4
-            - name: Use Node.js ${{ matrix.node-version }}
-              uses: actions/setup-node@v2.1.5
-              with:
-                  node-version: ${{ matrix.node-version }}
-            - name: Install
-              run: npm install --ignore-scripts
-            - name: Run Tests
-              run: npm run jest:coverage
-            - name: Coveralls Parallel
-              uses: coverallsapp/github-action@v1.1.2
-              with:
-                  github-token: ${{ secrets.GITHUB_TOKEN }}
-                  parallel: true
-                  flag-name: run-${{ matrix.node-version }}-${{ matrix.os }}
+    # unit-tests:
+    #     name: Unit Tests
+    #     if: github.event.pull_request.draft == false
+    #     strategy:
+    #         matrix:
+    #             node-version: [10.x, 12.x, 14.x]
+    #             os: [macos-latest, ubuntu-latest, windows-latest]
+    #     runs-on: ${{ matrix.os }}
+    #     steps:
+    #         - uses: actions/checkout@v2.3.4
+    #         - name: Use Node.js ${{ matrix.node-version }}
+    #           uses: actions/setup-node@v2.1.5
+    #           with:
+    #               node-version: ${{ matrix.node-version }}
+    #         - name: Install
+    #           run: npm install --ignore-scripts
+    #         - name: Run Tests
+    #           run: npm run jest:coverage
+    #         - name: Coveralls Parallel
+    #           uses: coverallsapp/github-action@v1.1.2
+    #           with:
+    #               github-token: ${{ secrets.GITHUB_TOKEN }}
+    #               parallel: true
+    #               flag-name: run-${{ matrix.node-version }}-${{ matrix.os }}
 
-    coverage:
-        name: Aggregate Coverage Calculations
-        if: github.event.pull_request.draft == false
-        needs: unit-tests
-        runs-on: ubuntu-latest
-        steps:
-            - name: Coveralls Finished
-              uses: coverallsapp/github-action@v1.1.2
-              with:
-                  github-token: ${{ secrets.GITHUB_TOKEN }}
-                  parallel-finished: true
+    # coverage:
+    #     name: Aggregate Coverage Calculations
+    #     if: github.event.pull_request.draft == false
+    #     needs: unit-tests
+    #     runs-on: ubuntu-latest
+    #     steps:
+    #         - name: Coveralls Finished
+    #           uses: coverallsapp/github-action@v1.1.2
+    #           with:
+    #               github-token: ${{ secrets.GITHUB_TOKEN }}
+    #               parallel-finished: true
 
     automerge:
         name: Automatically Merge Dependabot Pull Requests
         if: github.event.pull_request.draft == false
-        needs: [commit-lint, lint, unit-tests]
+        needs: [commit-lint, lint]
         runs-on: ubuntu-latest
         steps:
             - uses: fastify/github-action-merge-dependabot@v1.1.1
@@ -92,7 +92,7 @@ jobs:
     release:
         name: Create/Update Release Pull Request
         if: github.ref == 'refs/heads/master'
-        needs: [commit-lint, lint, unit-tests]
+        needs: [commit-lint, lint]
         runs-on: ubuntu-latest
         steps:
             - name: Release Please
