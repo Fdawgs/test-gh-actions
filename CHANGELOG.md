@@ -1,5 +1,13 @@
 # Changelog
 
+### [1.0.1](https://www.github.com/Fdawgs/test-gh-actions/compare/v1.0.0...v1.0.1) (2021-02-25)
+
+
+### Miscellaneous
+
+* cleanup ([e07cca5](https://www.github.com/Fdawgs/test-gh-actions/commit/e07cca5dff07a5f2f8db28a8f576c7b4ae9e663f))
+* whoops ([09765b2](https://www.github.com/Fdawgs/test-gh-actions/commit/09765b2f4c18674663d18bb3319b31fbe2907cbe))
+
 ## 1.0.0 (2021-02-25)
 
 
