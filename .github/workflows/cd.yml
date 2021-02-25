@@ -18,12 +18,12 @@ jobs:
                   release-type: node
             - uses: actions/checkout@v2.3.4
               if: ${{ steps.release.outputs.release_created }}
-            - name: Publish to NPM
-              if: ${{ steps.release.outputs.release_created }}
-              uses: actions/setup-node@v2.1.5
+            - uses: actions/setup-node@v2.1.5
               with:
                   node-version: 14.x
                   registry-url: https://registry.npmjs.org/
-              run: npm install --ignore-scripts && npm publish --ignore-scripts
+              if: ${{ steps.release.outputs.release_created }}
+            - run: npm install --ignore-scripts && npm publish --ignore-scripts
+              if: ${{ steps.release.outputs.release_created }}
               env:
                   NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
