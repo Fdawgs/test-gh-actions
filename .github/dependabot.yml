@@ -1,18 +1,30 @@
 version: 2
 updates:
     - package-ecosystem: docker
+      commit-message:
+          include: scope
+          prefix: build(deps)
+          prefix-development: build(deps-dev)
       directory: /
       schedule:
           interval: monthly
       open-pull-requests-limit: 25
 
     - package-ecosystem: github-actions
+      commit-message:
+          include: scope
+          prefix: build(deps)
+          prefix-development: build(deps-dev)
       directory: /
       schedule:
           interval: monthly
       open-pull-requests-limit: 25
 
     - package-ecosystem: npm
+      commit-message:
+          include: scope
+          prefix: build(deps)
+          prefix-development: build(deps-dev)
       directory: /
       schedule:
           interval: monthly
