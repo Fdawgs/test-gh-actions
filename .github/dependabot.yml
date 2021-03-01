@@ -3,8 +3,7 @@ updates:
     - package-ecosystem: docker
       commit-message:
           include: scope
-          prefix: build(deps)
-          prefix-development: build(deps-dev)
+          prefix: build
       directory: /
       schedule:
           interval: monthly
@@ -13,8 +12,7 @@ updates:
     - package-ecosystem: github-actions
       commit-message:
           include: scope
-          prefix: build(deps)
-          prefix-development: build(deps-dev)
+          prefix: build
       directory: /
       schedule:
           interval: monthly
@@ -23,8 +21,7 @@ updates:
     - package-ecosystem: npm
       commit-message:
           include: scope
-          prefix: build(deps)
-          prefix-development: build(deps-dev)
+          prefix: build
       directory: /
       schedule:
           interval: monthly
