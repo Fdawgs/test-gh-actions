@@ -18,7 +18,7 @@ jobs:
             - uses: actions/setup-node@v2.1.5
               with:
                   node-version: 14
-              run: echo "This PR is opened by ${{ github.event.pull_request.user.login }}  at  ${{ github.ref }}."
+            - run: echo "This PR is opened by ${{ github.event.pull_request.user.login }}  at  ${{ github.ref }}."
             - run: |
                   npm ci --ignore-scripts
                   npm run lint:prettier
